@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Manager Checklist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>QA Manager</h1>
+                <p>Activity Checklist</p>
+            </div>
+            <nav class="sidebar-nav">
+                {% for section in sections %}
+                <button class="nav-btn" data-section="{{ section.id }}">
+                    <span class="nav-icon">{{ section.icon }}</span>
+                    <span class="nav-text">{{ section.name }}</span>
+                </button>
+                {% endfor %}
+            </nav>
+            <div class="sidebar-footer">
+                <button id="resetBtn" class="btn-secondary" title="Reset all items">Reset All</button>
+                <button id="exportBtn" class="btn-secondary" title="Export as JSON">Export JSON</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Progress Header -->
+            <div class="progress-header">
+                <div class="progress-info">
+                    <h2 id="sectionTitle">Select a Section</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <p class="progress-text"><span id="completedCount">0</span> / <span id="totalCount">0</span> items completed</p>
+                </div>
+            </div>
+
+            <!-- Item Tabs (horizontal sub-tabs) -->
+            <div id="itemTabs" class="item-tabs-container" style="display: none;">
+                <div class="item-tabs-scroll">
+                    <div id="itemTabsList" class="item-tabs-list"></div>
+                </div>
+            </div>
+
+            <!-- Checklist Items -->
+            <div class="checklist-container">
+                <div id="checklistItems" class="checklist-items">
+                    <p class="empty-state">Select a section from the sidebar to view items</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=2"></script>
+</body>
+</html>
